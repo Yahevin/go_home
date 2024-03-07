@@ -1,8 +1,9 @@
+// уровень резистентности рассчитывается на основании веса в кг
 export const levelTable = {
-  a: 0,
-  b: 1,
-  c: 2,
-  d: 3,
+  a: 50,
+  b: 70,
+  c: 90,
+  d: 120,
 };
 
 export type LevelKeys = keyof typeof levelTable;

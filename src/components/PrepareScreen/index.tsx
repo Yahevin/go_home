@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { ButtonOwnProps, FormControl, FormControlLabel, RadioGroup } from '@mui/material';
-import text from 'src/constants/text';
-import { Button, Wrap } from './styles';
+import { ButtonOwnProps } from '@mui/material';
 import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
 import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
+import { writeTheNote } from 'src/utils/writeTheNote';
 import { useStore } from 'src/hooks/useStore';
+import text from 'src/constants/text';
+import { Button, Wrap } from './styles';
 
 export const PrepareScreen = () => {
   const setDefaults = useStore((state) => state.setDefaults);
+  const setConcentration = useStore((state) => state.setConcentration);
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
 
@@ -28,6 +30,8 @@ export const PrepareScreen = () => {
   };
 
   const handleSubmit = () => {
+    const result = writeTheNote();
+    setConcentration(result.concentration);
     setDefaults();
   };
 

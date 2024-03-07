@@ -3,16 +3,7 @@ import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
 import { Wrap, SX } from './styles';
 import { RadioBtn } from './Radio';
 import { useStore } from 'src/hooks/useStore';
-
-const valueTable = [
-  { key: '1min ago', value: '1' },
-  { key: '15min ago', value: '15' },
-  { key: '30min ago', value: '30' },
-  { key: '1h ago', value: '60' },
-  { key: '1:30 ago', value: '90' },
-  { key: '2h ago', value: '120' },
-  { key: '3h ago', value: '180' },
-];
+import { valueTable } from 'src/constants/timeValues';
 
 export const TimeSelect = () => {
   const { time, setTime } = useStore();

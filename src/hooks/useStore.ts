@@ -1,10 +1,16 @@
 import { create } from 'zustand';
 import { stage, Stage } from 'src/constants/stages';
+import { LevelKeys, levelTableKeys } from 'src/constants/levels';
+import { valueTable } from 'src/constants/timeValues';
+import { getConcentration } from 'src/utils/getConcentration';
 
 interface StoreType {
   currentStage: Stage;
   setCurrentStage: (stage: Stage) => void;
-  // inputs
+  // resistance level
+  level: LevelKeys;
+  setLevel: (val: LevelKeys) => void;
+  // drink inputs
   volume: number;
   setVolume: (val: number) => void;
   strength: number;
@@ -13,18 +19,27 @@ interface StoreType {
   setTime: (val: number) => void;
   // reset after submit
   setDefaults: () => void;
+  // alcohol
+  concentration: number;
+  setConcentration: (val: number) => void;
 }
 
-export const useStore = create<StoreType>()((set, get) => ({
+export const useStore = create<StoreType>()((set) => ({
   currentStage: stage.INITIAL,
   setCurrentStage: (val) => set({ currentStage: val }),
+  //
+  level: levelTableKeys.b,
+  setLevel: (val) => set({ level: val }),
   //
   volume: 0.4,
   setVolume: (val) => set({ volume: val }),
   strength: 5,
   setStrength: (val) => set({ strength: val }),
-  time: 1,
+  time: valueTable[0].value,
   setTime: (val) => set({ time: val }),
   //
-  setDefaults: () => set({ time: 1, strength: 5, volume: 0.4 }),
+  setDefaults: () => set({ time: valueTable[0].value, strength: 5, volume: 0.4 }),
+  //
+  concentration: getConcentration(),
+  setConcentration: (val) => set({ concentration: val }),
 }));

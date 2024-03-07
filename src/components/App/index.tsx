@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { Content, Wrap, Footer } from './styles';
+import { Content, Wrap, Footer, Counter } from './styles';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
 import { InitialScreen } from 'src/components/InitialScreen';
@@ -9,6 +9,7 @@ import { InputScreen } from 'src/components/InputScreen';
 
 export const App = () => {
   const currentStage = useStore((state) => state.currentStage);
+  const concentration = useStore((state) => state.concentration);
 
   const getScreen = useMemo(() => {
     switch (currentStage) {
@@ -30,6 +31,7 @@ export const App = () => {
 
   return (
     <Wrap>
+      <Counter>{concentration.toFixed(5)}</Counter>
       <Content>{getScreen()}</Content>
       <Footer>Поддержать проект</Footer>
     </Wrap>
