@@ -29,10 +29,11 @@ export const getConcentration = (newNote?: Note) => {
 
   const writtenVolume = newState.reduce((acc, item) => acc + item.value, 0);
   const currentVolume = writtenVolume - getResurrection(now - startTime, mass);
+  const positiveValue = currentVolume < 0 ? 0 : currentVolume;
 
   return {
     state: newState,
-    alcoholVolume: currentVolume,
-    concentration: currentVolume / mass,
+    alcoholVolume: positiveValue,
+    concentration: positiveValue / mass,
   };
 };
