@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import GlobalStyle from 'src/constants/globalStyle';
 import theme from 'src/constants/theme';
 import { App } from 'src/components/App';
@@ -14,3 +15,5 @@ root.render(
     </ThemeProvider>
   </React.StrictMode>
 );
+
+serviceWorkerRegistration.register();
