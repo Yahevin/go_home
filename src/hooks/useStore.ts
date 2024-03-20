@@ -40,6 +40,6 @@ export const useStore = create<StoreType>()((set) => ({
   //
   setDefaults: () => set({ time: valueTable[0].value, strength: 5, volume: 0.4 }),
   //
-  concentration: getConcentration(),
+  concentration: getConcentration().concentration,
   setConcentration: (val) => set({ concentration: val }),
 }));

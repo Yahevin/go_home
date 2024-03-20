@@ -2,12 +2,11 @@ const text = {
   // initial page
   ABOUT_TITLE: 'О проекте',
   ABOUT_PROJECT:
-    'alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter',
+    'Это приложение позволяет подсчитывать накопленные промили за вычетом нейтрализованного количества. ' +
+    'Для достижения адекватных показателей, нужно руководствуясь инженерной интуицией определить собственный уровень устойчивости',
   LET_START: 'Приступим!',
   // select the level page
   LEVEL_SELECT_TITLE: 'Выбор уровня',
-  LEVEL_SELECT_DESCRIPTION:
-    'alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter alcohol counter',
   NEXT: 'Продолжить',
   // prepare to input page
   TIME_SELECT_TITLE: 'Определимся с временем',

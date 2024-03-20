@@ -11,5 +11,5 @@ export type LevelKeys = keyof typeof levelTable;
 type LevelTableKeys = { [key in LevelKeys]: key };
 
 export const levelTableKeys: LevelTableKeys = Object.keys(levelTable).reduce((acc, item) => {
-  return { ...(acc ?? {}), [item]: item };
+  return { ...(acc ?? ({} as LevelTableKeys)), [item]: item };
 }, {} as LevelTableKeys);

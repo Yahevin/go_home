@@ -6,9 +6,10 @@ import { getResurrection } from 'src/utils/getResurrection';
 const hour = 3600 * 1000; // в миллисекундах
 
 // время в timestamp: чистый спирт
-type State = { timestamp: number; value: number }[];
+type Note = { timestamp: number; value: number };
+type State = Note[];
 
-export const getConcentration = () => {
+export const getConcentration = (newNote?: Note) => {
   const level: LevelKeys = store.get(selected_level) ?? levelTableKeys.b;
 
   const now = new Date().getTime();
@@ -23,6 +24,15 @@ export const getConcentration = () => {
     }
     return now - item.timestamp < 8 * hour;
   });
-  const writtenVolume = state.reduce((acc, item) => acc + item.value, 0);
-  return (writtenVolume - getResurrection(now - startTime, mass)) / mass;
+
+  const newState = [...state, newNote ?? null].filter((item) => !!item);
+
+  const writtenVolume = newState.reduce((acc, item) => acc + item.value, 0);
+  const currentVolume = writtenVolume - getResurrection(now - startTime, mass);
+
+  return {
+    state: newState,
+    alcoholVolume: currentVolume,
+    concentration: currentVolume / mass,
+  };
 };
