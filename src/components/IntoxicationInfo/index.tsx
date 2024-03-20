@@ -5,7 +5,7 @@ import { useStore } from 'src/hooks/useStore';
 import { isAuthorized } from 'src/utils/isAuthorized';
 import { Button, Wrap } from './styles';
 
-export const InitialScreen = () => {
+export const IntoxicationInfo = () => {
   const setCurrentStage = useStore((state) => state.setCurrentStage);
 
   const handleClick = () => {
@@ -16,12 +16,18 @@ export const InitialScreen = () => {
     }
   };
 
+  const description = text.INFO_DESCRIPTION.split(';').filter((item) => !!item);
+
   return (
     <>
-      <Wrap>{text.ABOUT_PROJECT}</Wrap>
+      <Wrap>
+        {description.map((item) => (
+          <div key={item}>{item};</div>
+        ))}
+      </Wrap>
 
       <Button variant="outlined" color="secondary" onClick={handleClick}>
-        {text.LET_START}
+        {text.NEXT}
       </Button>
     </>
   );

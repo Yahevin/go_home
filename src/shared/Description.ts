@@ -5,7 +5,7 @@ export const Description = (title: string) => styled.div`
   position: relative;
   border: 2px solid ${colors.white};
   border-radius: 5px;
-  padding: 8px 12px;
+  padding: 14px 12px;
 
   &::after {
     content: '${title}';

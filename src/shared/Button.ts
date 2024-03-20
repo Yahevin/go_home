@@ -5,6 +5,6 @@ import { Button as ButtonRaw } from '@mui/material';
 
 export type ButtonType = ExtendButtonBase<ButtonTypeMap>;
 
-export const ButtonShared = materialStyled(ButtonRaw)<ButtonType>(() => ({
+export const ButtonShared: ButtonType = materialStyled(ButtonRaw)(() => ({
   fontFamily: 'Kode Mono, monospace',
 }));

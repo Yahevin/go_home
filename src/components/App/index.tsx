@@ -1,11 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
-import { Content, Wrap, Footer, Counter } from './styles';
+import React, { useMemo } from 'react';
+import { Content, Wrap, Counter } from './styles';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
+import { SideMenu } from 'src/components/SideMenu';
 import { InitialScreen } from 'src/components/InitialScreen';
-import { SelectLevelScreen } from 'src/components/SelectLevelScreen';
 import { PrepareScreen } from 'src/components/PrepareScreen';
-import { InputScreen } from 'src/components/InputScreen';
+import { SelectLevelScreen } from 'src/components/SelectLevelScreen';
+import { IntoxicationInfo } from 'src/components/IntoxicationInfo';
 
 export const App = () => {
   const currentStage = useStore((state) => state.currentStage);
@@ -23,8 +24,8 @@ export const App = () => {
       case stage.PREPARE_TO_INPUT: {
         return () => <PrepareScreen />;
       }
-      case stage.VALUE_INPUT: {
-        return () => <InputScreen />;
+      case stage.INTOXICATION_INFO: {
+        return () => <IntoxicationInfo />;
       }
     }
   }, [currentStage]);
@@ -33,7 +34,7 @@ export const App = () => {
     <Wrap>
       <Counter>{concentration.toFixed(5)}</Counter>
       <Content>{getScreen()}</Content>
-      <Footer>Поддержать проект</Footer>
+      <SideMenu />
     </Wrap>
   );
 };
