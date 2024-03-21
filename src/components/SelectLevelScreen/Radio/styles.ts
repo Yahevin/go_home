@@ -15,6 +15,6 @@ export const Content = styled.div`
 `;
 
 export const ContentChecked = styled(Content)`
-  transform: scale(1.2);
+  transform: scale(1.35);
   box-shadow: 0 0 4px 1px ${colors.grey};
 `;
