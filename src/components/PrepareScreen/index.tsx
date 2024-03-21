@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { ButtonOwnProps } from '@mui/material';
-import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
-import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
-import { writeTheNote } from 'src/utils/writeTheNote';
-import { useStore } from 'src/hooks/useStore';
+import { throttle } from 'lodash';
+
 import text from 'src/constants/text';
+import { useStore } from 'src/hooks/useStore';
+import { writeTheNote } from 'src/utils/writeTheNote';
+import { DoneArrow } from 'src/components/PrepareScreen/DoneArrow';
+import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
+import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
 import { Button, Wrap } from './styles';
 
 export const PrepareScreen = () => {
   const setDefaults = useStore((state) => state.setDefaults);
-  const setConcentration = useStore((state) => state.setConcentration);
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
+  const onSubmitEvent = useRef<() => void>();
 
   const getVariant = (isPast: boolean): ButtonOwnProps['variant'] => {
     if (!showValueInput) {
@@ -29,11 +32,14 @@ export const PrepareScreen = () => {
     setShowTimeInput(isNeedToWriteTime);
   };
 
-  const handleSubmit = () => {
-    const result = writeTheNote();
-    setConcentration(result.concentration);
-    setDefaults();
-  };
+  const handleSubmit = useCallback(
+    throttle(() => {
+      onSubmitEvent.current?.();
+      writeTheNote();
+      setDefaults();
+    }, 1000),
+    []
+  );
 
   return (
     <>
@@ -52,6 +58,8 @@ export const PrepareScreen = () => {
           {text.INPUT_SUBMIT}
         </Button>
       )}
+
+      <DoneArrow ref={onSubmitEvent} />
     </>
   );
 };
