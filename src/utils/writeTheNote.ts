@@ -4,7 +4,7 @@ import { drink_notes } from 'src/constants/storeKeys';
 import { getConcentration } from 'src/utils/getConcentration';
 
 export const writeTheNote = () => {
-  const { time, strength, volume } = useStore.getState();
+  const { time, strength, volume, setConcentration } = useStore.getState();
 
   const pureVolume = strength * volume * 10; // спирт в граммах
   const now = new Date().getTime();
@@ -13,6 +13,8 @@ export const writeTheNote = () => {
 
   // write the note
   store.set(drink_notes, state);
+  // update value
+  setConcentration(concentration);
 
   return {
     alcoholVolume,
