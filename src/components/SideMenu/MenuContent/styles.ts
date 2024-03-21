@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SxProps } from '@mui/system/styleFunctionSx/styleFunctionSx';
 
 export const Wrap = styled.div`
   display: flex;
@@ -12,3 +13,10 @@ export const Wrap = styled.div`
 export const Spacer = styled.div`
   flex: 1;
 `;
+
+export const ButtonSX: SxProps = {
+  display: 'flex',
+  gap: '10px',
+  textAlign: 'left',
+  justifyContent: 'flex-start',
+};

@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
-import { Content, Wrap, Counter } from './styles';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
+import { useUpdateCounter } from 'src/hooks/useUpdateCounter';
 import { SideMenu } from 'src/components/SideMenu';
 import { InitialScreen } from 'src/components/InitialScreen';
 import { PrepareScreen } from 'src/components/PrepareScreen';
 import { SelectLevelScreen } from 'src/components/SelectLevelScreen';
 import { IntoxicationInfo } from 'src/components/IntoxicationInfo';
-import { useUpdateCounter } from 'src/hooks/useUpdateCounter';
+import { Counter } from './Counter';
+import { Download } from './Download';
+import { Content, Wrap } from './styles';
 
 export const App = () => {
   const currentStage = useStore((state) => state.currentStage);
-  const concentration = useStore((state) => state.concentration);
 
   const getScreen = useMemo(() => {
     switch (currentStage) {
@@ -35,7 +36,8 @@ export const App = () => {
 
   return (
     <Wrap>
-      <Counter>{concentration.toFixed(5)}</Counter>
+      <Counter />
+      <Download />
       <Content>{getScreen()}</Content>
       <SideMenu />
     </Wrap>

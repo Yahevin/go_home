@@ -15,7 +15,7 @@ export const Content = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 180px 40px 40px;
+  padding: 150px 40px 80px 40px;
 `;
 
 export const Footer = styled.footer`
@@ -24,12 +24,4 @@ export const Footer = styled.footer`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`;
-
-export const Counter = styled.div`
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: ${colors.yellow};
 `;
