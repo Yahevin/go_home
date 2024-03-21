@@ -7,6 +7,7 @@ import { InitialScreen } from 'src/components/InitialScreen';
 import { PrepareScreen } from 'src/components/PrepareScreen';
 import { SelectLevelScreen } from 'src/components/SelectLevelScreen';
 import { IntoxicationInfo } from 'src/components/IntoxicationInfo';
+import { useUpdateCounter } from 'src/hooks/useUpdateCounter';
 
 export const App = () => {
   const currentStage = useStore((state) => state.currentStage);
@@ -29,6 +30,8 @@ export const App = () => {
       }
     }
   }, [currentStage]);
+
+  useUpdateCounter();
 
   return (
     <Wrap>
