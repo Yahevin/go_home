@@ -9,6 +9,7 @@ import { stage } from 'src/constants/stages';
 import text from 'src/constants/text';
 import { Button, Wrap, SX } from './styles';
 import { RadioBtn } from './Radio';
+import { updateConcentration } from 'src/utils/updateConcentration';
 
 export const SelectLevelScreen = () => {
   const { setCurrentStage, level, setLevel } = useStore((state) => ({
@@ -26,6 +27,9 @@ export const SelectLevelScreen = () => {
     setLevel(selected);
 
     store.set(selected_level, selected);
+
+    // пересчет на новую массу
+    updateConcentration();
   };
 
   return (

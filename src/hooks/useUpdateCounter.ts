@@ -1,9 +1,8 @@
 import { useStore } from 'src/hooks/useStore';
 import { useEffect, useMemo, useRef } from 'react';
-import { getConcentration } from 'src/utils/getConcentration';
+import { updateConcentration } from 'src/utils/updateConcentration';
 
 export const useUpdateCounter = () => {
-  const setConcentration = useStore((state) => state.setConcentration);
   const storeValue = useStore((state) => state.concentration);
 
   // reset interval after update concentration in another place
@@ -12,9 +11,7 @@ export const useUpdateCounter = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const { concentration } = getConcentration();
-      setConcentration(concentration);
-      val.current = concentration;
+      val.current = updateConcentration();
     }, 3000);
 
     return () => clearInterval(timer);
