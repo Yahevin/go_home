@@ -18,6 +18,7 @@ interface StoreType {
   time: number;
   setTime: (val: number) => void;
   // reset after submit
+  resetMarker: number;
   setDefaults: () => void;
   // alcohol
   concentration: number;
@@ -38,7 +39,8 @@ export const useStore = create<StoreType>()((set) => ({
   time: valueTable[0].value,
   setTime: (val) => set({ time: val }),
   //
-  setDefaults: () => set({ time: valueTable[0].value, strength: 5, volume: 0.4 }),
+  resetMarker: 0,
+  setDefaults: () => set((state) => ({ resetMarker: state.resetMarker + 1, time: valueTable[0].value })),
   //
   concentration: getConcentration().concentration,
   setConcentration: (val) => set({ concentration: val }),
