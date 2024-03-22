@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
-import { useUpdateCounter } from 'src/hooks/useUpdateCounter';
 import { SideMenu } from 'src/components/SideMenu';
 import { InitialScreen } from 'src/components/InitialScreen';
 import { PrepareScreen } from 'src/components/PrepareScreen';
@@ -31,8 +30,6 @@ export const App = () => {
       }
     }
   }, [currentStage]);
-
-  useUpdateCounter();
 
   return (
     <Wrap>

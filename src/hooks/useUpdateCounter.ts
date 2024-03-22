@@ -16,4 +16,6 @@ export const useUpdateCounter = () => {
 
     return () => clearInterval(timer);
   }, [isNeedToReset]);
+
+  return storeValue;
 };

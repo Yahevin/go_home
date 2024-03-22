@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { debounce } from 'lodash';
 import { marksStrength, marksValue } from './constants';
 import { useStore } from 'src/hooks/useStore';
 import { Slider } from './styles';
 
 export const ValueInput = () => {
-  const { strength, setStrength, volume, setVolume, resetMarker } = useStore();
+  const strength = useStore((state) => state.strength);
+  const setStrength = useStore((state) => state.setStrength);
+  const volume = useStore((state) => state.volume);
+  const setVolume = useStore((state) => state.setVolume);
+  const resetMarker = useStore((state) => state.resetMarker);
 
-  const [volumeState, setVolumeState] = useState(volume);
   const [strengthState, setStrengthState] = useState(strength);
-
-  const volumeScale = (val: number) => {
-    if (val < 5) {
-      return (val + 1) / 100;
-    } else {
-      return (val - 4) / 10;
-    }
-  };
-  const onVolumeChange = debounce((_: Event, newValue: number) => {
-    setVolumeState(newValue);
-    setVolume(volumeScale(newValue));
-  }, 50);
+  const [volumeState, setVolumeState] = useState(volume);
 
   const strengthScale = (val: number) => {
     if (val < 13) {
@@ -31,10 +22,13 @@ export const ValueInput = () => {
       return (val - 12) * 5 + 20;
     }
   };
-  const onStrengthChange = debounce((_: Event, newValue: number) => {
-    setStrengthState(newValue);
-    setStrength(strengthScale(newValue));
-  }, 50);
+  const volumeScale = (val: number) => {
+    if (val < 5) {
+      return (val + 1) / 100;
+    } else {
+      return (val - 4) / 10;
+    }
+  };
 
   // reset defaults after submit
   useEffect(() => {
@@ -48,6 +42,7 @@ export const ValueInput = () => {
   return (
     <>
       <Slider
+        defaultValue={8}
         step={strengthState >= 12 ? 1 : 0.5}
         min={3}
         max={17}
@@ -56,7 +51,12 @@ export const ValueInput = () => {
         valueLabelDisplay="auto"
         color={'primary'}
         value={strengthState}
-        onChange={onStrengthChange}
+        onChange={(_: Event, newValue: number) => {
+          setStrengthState(newValue);
+        }}
+        onChangeCommitted={(_: Event, newValue: number) => {
+          setStrength(strengthScale(newValue));
+        }}
       />
       <Slider
         defaultValue={5}
@@ -68,7 +68,12 @@ export const ValueInput = () => {
         valueLabelDisplay="auto"
         color={'primary'}
         value={volumeState}
-        onChange={onVolumeChange}
+        onChange={(_: Event, newValue: number) => {
+          setVolumeState(newValue);
+        }}
+        onChangeCommitted={(_: Event, newValue: number) => {
+          setVolume(volumeScale(newValue));
+        }}
       />
     </>
   );
