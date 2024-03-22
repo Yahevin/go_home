@@ -1,10 +1,10 @@
 import React from 'react';
 import CountUp from 'react-countup';
-import { useStore } from 'src/hooks/useStore';
+import { useUpdateCounter } from 'src/hooks/useUpdateCounter';
 import { Wrap } from './styles';
 
 export const Counter = () => {
-  const concentration = useStore((state) => state.concentration);
+  const concentration = useUpdateCounter();
 
   return (
     <Wrap>
