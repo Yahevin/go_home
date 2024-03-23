@@ -19,6 +19,7 @@ const text = {
   CHANGE_LEVEL: 'Изменить уровень',
   INTOXICATION_INFO: 'Подробнее об уровнях интоксикации',
   RESET: 'Сброс',
+  BACKWARD: 'Отменить последний ввод',
   // intoxication page
   INFO_TITLE: 'Что значат цифру сверху',
   INFO_DESCRIPTION:
