@@ -42,7 +42,6 @@ export const ValueInput = () => {
   return (
     <>
       <Slider
-        defaultValue={8}
         step={strengthState >= 12 ? 1 : 0.5}
         min={3}
         max={17}
@@ -52,6 +51,7 @@ export const ValueInput = () => {
         color={'primary'}
         value={strengthState}
         onChange={(_: Event, newValue: number) => {
+          if (_.type === 'mousedown') return;
           setStrengthState(newValue);
         }}
         onChangeCommitted={(_: Event, newValue: number) => {
@@ -59,7 +59,6 @@ export const ValueInput = () => {
         }}
       />
       <Slider
-        defaultValue={5}
         step={1}
         min={1}
         max={14}
@@ -69,6 +68,7 @@ export const ValueInput = () => {
         color={'primary'}
         value={volumeState}
         onChange={(_: Event, newValue: number) => {
+          if (_.type === 'mousedown') return;
           setVolumeState(newValue);
         }}
         onChangeCommitted={(_: Event, newValue: number) => {
