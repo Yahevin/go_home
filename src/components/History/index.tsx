@@ -1,5 +1,6 @@
 import React from 'react';
 import store from 'store2';
+
 import { Note } from 'src/types';
 import text from 'src/constants/text';
 import { stage } from 'src/constants/stages';
@@ -28,12 +29,13 @@ export const History = () => {
           <>
             {currentDrinks.map((item) => (
               <Item key={item.id}>
-                ({item.volume}L - {item.strength}%) * {item.percentage}% выпито
+                {item.volume}L - {item.strength}% выпито на {item.percentage}%
               </Item>
             ))}
+            <Item>{text.DIVIDER}</Item>
             {doneDrinks.map((item) => (
               <Item key={item.timestamp}>
-                {item.volume}L - {item.strength}%
+                {item.volume}L - {item.strength}% выпито в {new Date(item.timestamp).toLocaleTimeString()}
               </Item>
             ))}
           </>

@@ -33,6 +33,8 @@ const text = {
   // history page
   HISTORY_PAGE: 'История',
   EMPTY_HISTORY: 'Еще нет ни одной записи. Пожалуйста бахни уже что-нибудь, клянусь Дионисом тебе это нужно',
+  // common
+  DIVIDER: '-----',
 };
 
 export default text;
