@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import colors from 'src/constants/colors';
 
 export const Description = (title: string) => styled.div`
+  width: 100%;
   position: relative;
   border: 2px solid ${colors.white};
   border-radius: 5px;

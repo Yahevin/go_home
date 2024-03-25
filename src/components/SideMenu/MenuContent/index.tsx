@@ -2,6 +2,7 @@ import React from 'react';
 import store from 'store2';
 
 import Undo from '@mui/icons-material/Undo';
+import HistoryIcon from '@mui/icons-material/History';
 import AltRouteIcon from '@mui/icons-material/AltRoute';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
@@ -26,6 +27,10 @@ export const MenuContent = () => {
     setCurrentStage(stage.INTOXICATION_INFO);
   };
 
+  const handleHistory = () => {
+    setCurrentStage(stage.HISTORY);
+  };
+
   const handleBackward = () => {
     const drinks = store.get(drink_notes);
     store.set(drink_notes, drinks.slice(0, -1));
@@ -47,6 +52,10 @@ export const MenuContent = () => {
 
       <Button variant={'text'} color="secondary" onClick={handleInfo} sx={ButtonSX}>
         <LocalLibraryIcon /> {text.INTOXICATION_INFO}
+      </Button>
+
+      <Button variant={'text'} color="secondary" onClick={handleHistory} sx={ButtonSX}>
+        <HistoryIcon /> {text.HISTORY}
       </Button>
 
       <Button variant={'text'} color="error" onClick={handleBackward} sx={ButtonSX}>

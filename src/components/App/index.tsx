@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
+import { History } from 'src/components/History';
 import { SideMenu } from 'src/components/SideMenu';
 import { InitialScreen } from 'src/components/InitialScreen';
 import { PrepareScreen } from 'src/components/PrepareScreen';
@@ -27,6 +28,9 @@ export const App = () => {
       }
       case stage.INTOXICATION_INFO: {
         return () => <IntoxicationInfo />;
+      }
+      case stage.HISTORY: {
+        return () => <History />;
       }
     }
   }, [currentStage]);
