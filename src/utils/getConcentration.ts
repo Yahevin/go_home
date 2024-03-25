@@ -40,7 +40,15 @@ export const getConcentration = (newNote?: Note) => {
 
   const newState = [...state, newNote ?? null].filter((item) => !!item);
 
-  const writtenVolume = newState.reduce((acc, item) => acc + item.value, 0);
+  const writtenVolume = newState.reduce(
+    (acc, item) =>
+      acc +
+      getAlcoholVolume({
+        volume: item.volume,
+        strength: item.strength,
+      }),
+    0
+  );
   const currentVolume = writtenVolume + getUncompleted() - getResurrection(now - startTime, mass);
   const positiveValue = currentVolume < 0 ? 0 : currentVolume;
 

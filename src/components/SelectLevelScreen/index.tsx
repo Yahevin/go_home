@@ -20,6 +20,10 @@ export const SelectLevelScreen = () => {
 
   const handleClick = () => {
     setCurrentStage(stage.PREPARE_TO_INPUT);
+
+    if (!store.get(selected_level)) {
+      store.set(selected_level, level);
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
