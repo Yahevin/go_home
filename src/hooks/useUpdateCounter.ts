@@ -10,8 +10,16 @@ export const useUpdateCounter = () => {
   const isNeedToReset = useMemo(() => val.current !== storeValue, [val, storeValue]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const update = () => {
       val.current = updateConcentration();
+    };
+
+    //initial update
+    update();
+
+    // set updater by interval
+    const timer = setInterval(() => {
+      update();
     }, 3000);
 
     return () => clearInterval(timer);

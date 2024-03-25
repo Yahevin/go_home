@@ -4,10 +4,12 @@ import { throttle } from 'lodash';
 
 import text from 'src/constants/text';
 import { useStore } from 'src/hooks/useStore';
+import { addDrink } from 'src/utils/addDrink';
 import { writeTheNote } from 'src/utils/writeTheNote';
 import { DoneArrow } from 'src/components/PrepareScreen/DoneArrow';
 import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
 import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
+import { CurrentDrink } from 'src/components/PrepareScreen/CurrentDrink';
 import { Button, Wrap } from './styles';
 
 export const PrepareScreen = () => {
@@ -35,10 +37,19 @@ export const PrepareScreen = () => {
   const handleSubmit = useCallback(
     throttle(() => {
       onSubmitEvent.current?.();
-      writeTheNote();
+
+      if (showTimeInput) {
+        // count drunk volume
+        writeTheNote();
+      } else {
+        // add to completion counter
+        addDrink();
+      }
+
+      // reset inputs
       setDefaults();
     }, 1000),
-    []
+    [showTimeInput]
   );
 
   return (
@@ -59,6 +70,7 @@ export const PrepareScreen = () => {
         </Button>
       )}
 
+      <CurrentDrink />
       <DoneArrow ref={onSubmitEvent} />
     </>
   );

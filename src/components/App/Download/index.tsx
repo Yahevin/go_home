@@ -5,11 +5,7 @@ import { Wrap } from './styles';
 
 export const Download = () => {
   const deferredPrompt = useRef<any>();
-  const [isStandAlone, setIsStandAlone] = useState(false);
-
-  useEffect(() => {
-    setIsStandAlone(window.matchMedia('(display-mode: standalone)').matches);
-  }, []);
+  const [isStandAlone, setIsStandAlone] = useState(true);
 
   useEffect(() => {
     const handler = () => {
@@ -25,6 +21,7 @@ export const Download = () => {
   useEffect(() => {
     const handler = (e: any) => {
       deferredPrompt.current = e;
+      setIsStandAlone(false);
     };
 
     window.addEventListener('beforeinstallprompt', handler);

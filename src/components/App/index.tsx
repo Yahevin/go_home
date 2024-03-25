@@ -37,6 +37,7 @@ export const App = () => {
       <Download />
       <Content>{getScreen()}</Content>
       <SideMenu />
+      <div id={'overlay'} />
     </Wrap>
   );
 };
