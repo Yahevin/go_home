@@ -6,7 +6,6 @@ export const Wrap = styled.div`
   flex-direction: column;
   position: relative;
   background: ${colors.purple};
-  border: 2px solid ${colors.grey};
   min-height: 100dvh;
 `;
 
@@ -15,7 +14,7 @@ export const Content = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 150px 40px 80px 40px;
+  padding: 150px 40px 100px 40px;
 `;
 
 export const Footer = styled.footer`
