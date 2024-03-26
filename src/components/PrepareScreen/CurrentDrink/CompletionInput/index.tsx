@@ -12,14 +12,14 @@ export const CompletionInput = ({ percentage, id }: Drink) => {
   const currentDrinks = useStore((state) => state.currentDrinks);
   const setCurrentDrinks = useStore((state) => state.setCurrentDrinks);
 
-  const handleCommit = (_: Event, newValue: number) => {
+  const handleCommit = () => {
     const currentIndex = currentDrinks.findIndex((item) => item.id === id);
     const drinks: Drink[] = [].slice.call(currentDrinks);
     const currentItem: Drink = drinks.splice(currentIndex, 1)[0];
 
-    if (newValue !== 100) {
+    if (state !== 100) {
       // update current drink
-      drinks.splice(currentIndex, 0, { ...currentItem, percentage: newValue });
+      drinks.splice(currentIndex, 0, { ...currentItem, percentage: state });
       setCurrentDrinks(drinks);
       // write new value
       updateConcentration();

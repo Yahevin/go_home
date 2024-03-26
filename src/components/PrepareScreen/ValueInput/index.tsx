@@ -54,8 +54,8 @@ export const ValueInput = () => {
           if (_.type === 'mousedown') return;
           setStrengthState(newValue);
         }}
-        onChangeCommitted={(_: Event, newValue: number) => {
-          setStrength(strengthScale(newValue));
+        onChangeCommitted={() => {
+          setStrength(strengthScale(strengthState));
         }}
       />
       <Slider
@@ -71,8 +71,8 @@ export const ValueInput = () => {
           if (_.type === 'mousedown') return;
           setVolumeState(newValue);
         }}
-        onChangeCommitted={(_: Event, newValue: number) => {
-          setVolume(volumeScale(newValue));
+        onChangeCommitted={() => {
+          setVolume(volumeScale(volumeState));
         }}
       />
     </>
