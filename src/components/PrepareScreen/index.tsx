@@ -13,7 +13,6 @@ import { CurrentDrink } from 'src/components/PrepareScreen/CurrentDrink';
 import { Button, Wrap } from './styles';
 
 export const PrepareScreen = () => {
-  const setDefaults = useStore((state) => state.setDefaults);
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
   const onSubmitEvent = useRef<() => void>();
@@ -45,9 +44,6 @@ export const PrepareScreen = () => {
         // add to completion counter
         addDrink();
       }
-
-      // reset inputs
-      setDefaults();
     }, 1000),
     [showTimeInput]
   );

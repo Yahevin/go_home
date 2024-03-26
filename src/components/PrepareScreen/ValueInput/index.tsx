@@ -1,43 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { marksStrength, marksValue } from './constants';
+import React, { useState } from 'react';
 import { useStore } from 'src/hooks/useStore';
+import { initialStrength, initialVolume, strengthScale, volumeScale } from 'src/utils/inputScale';
+import { marksStrength, marksValue } from './constants';
 import { Slider } from './styles';
 
 export const ValueInput = () => {
-  const strength = useStore((state) => state.strength);
   const setStrength = useStore((state) => state.setStrength);
-  const volume = useStore((state) => state.volume);
   const setVolume = useStore((state) => state.setVolume);
-  const resetMarker = useStore((state) => state.resetMarker);
 
-  const [strengthState, setStrengthState] = useState(strength);
-  const [volumeState, setVolumeState] = useState(volume);
-
-  const strengthScale = (val: number) => {
-    if (val < 13) {
-      return val;
-    } else if (val === 13) {
-      return 18;
-    } else {
-      return (val - 12) * 5 + 20;
-    }
-  };
-  const volumeScale = (val: number) => {
-    if (val < 5) {
-      return (val + 1) / 100;
-    } else {
-      return (val - 4) / 10;
-    }
-  };
-
-  // reset defaults after submit
-  useEffect(() => {
-    setStrengthState(5);
-    setStrength(5);
-
-    setVolumeState(8);
-    setVolume(0.4);
-  }, [resetMarker]);
+  const [strengthState, setStrengthState] = useState(initialStrength);
+  const [volumeState, setVolumeState] = useState(initialVolume);
 
   return (
     <>

@@ -3,6 +3,7 @@ import { Drink } from 'src/types';
 import { stage, Stage } from 'src/constants/stages';
 import { valueTable } from 'src/constants/timeValues';
 import { LevelKeys, levelTableKeys } from 'src/constants/levels';
+import { initialStrength, initialVolume, volumeScale, strengthScale } from 'src/utils/inputScale';
 
 interface StoreType {
   currentStage: Stage;
@@ -17,9 +18,6 @@ interface StoreType {
   setStrength: (val: number) => void;
   time: number;
   setTime: (val: number) => void;
-  // reset after submit
-  resetMarker: number;
-  setDefaults: () => void;
   // alcohol
   concentration: number;
   setConcentration: (val: number) => void;
@@ -35,15 +33,12 @@ export const useStore = create<StoreType>()((set) => ({
   level: levelTableKeys.b,
   setLevel: (val) => set({ level: val }),
   //
-  volume: 0.4,
+  volume: volumeScale(initialVolume),
   setVolume: (val) => set({ volume: val }),
-  strength: 5,
+  strength: strengthScale(initialStrength),
   setStrength: (val) => set({ strength: val }),
   time: valueTable[0].value,
   setTime: (val) => set({ time: val }),
-  //
-  resetMarker: 0,
-  setDefaults: () => set((state) => ({ resetMarker: state.resetMarker + 1, time: valueTable[0].value })),
   //
   concentration: 0,
   setConcentration: (val) => set({ concentration: val }),
