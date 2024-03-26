@@ -6,8 +6,7 @@ import { LevelKeys, levelTable, levelTableKeys } from 'src/constants/levels';
 import { getAlcoholVolume } from 'src/utils/getAlcoholVolume';
 import { getResurrection } from 'src/utils/getResurrection';
 import { safeDivide } from 'src/utils/safeDivide';
-
-const hour = 3600 * 1000; // в миллисекундах
+import { HOUR } from 'src/constants/common';
 
 type State = Note[];
 
@@ -32,10 +31,12 @@ export const getConcentration = (newNote?: Note) => {
   let startTime = stateRaw.length > 0 ? Number.MAX_SAFE_INTEGER : now;
 
   const state = stateRaw.filter((item) => {
-    if (startTime > item.timestamp) {
+    const isActual = now - item.timestamp < 8 * HOUR;
+
+    if (isActual && startTime > item.timestamp) {
       startTime = item.timestamp;
     }
-    return now - item.timestamp < 8 * hour;
+    return isActual;
   });
 
   const newState = [...state, newNote ?? null].filter((item) => !!item);
