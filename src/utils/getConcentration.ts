@@ -5,8 +5,8 @@ import { selected_level, drink_notes } from 'src/constants/storeKeys';
 import { LevelKeys, levelTable, levelTableKeys } from 'src/constants/levels';
 import { getAlcoholVolume } from 'src/utils/getAlcoholVolume';
 import { getResurrection } from 'src/utils/getResurrection';
+import { getActualNotes } from 'src/utils/getActualNotes';
 import { safeDivide } from 'src/utils/safeDivide';
-import { HOUR } from 'src/constants/common';
 
 type State = Note[];
 
@@ -28,16 +28,10 @@ export const getConcentration = (newNote?: Note) => {
   const mass = levelTable[level]; // масса пользователя в кг
 
   const stateRaw: State = store.get(drink_notes) ?? [];
-  let startTime = stateRaw.length > 0 ? Number.MAX_SAFE_INTEGER : now;
-
-  const state = stateRaw.filter((item) => {
-    const isActual = now - item.timestamp < 8 * HOUR;
-
-    if (isActual && startTime > item.timestamp) {
-      startTime = item.timestamp;
-    }
-    return isActual;
-  });
+  const state = getActualNotes(stateRaw);
+  const startTime = state.reduce((min, item) => {
+    return item.timestamp < min ? item.timestamp : min;
+  }, now);
 
   const newState = [...state, newNote ?? null].filter((item) => !!item);
 

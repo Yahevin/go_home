@@ -6,16 +6,14 @@ import text from 'src/constants/text';
 import { stage } from 'src/constants/stages';
 import { useStore } from 'src/hooks/useStore';
 import { isAuthorized } from 'src/utils/isAuthorized';
+import { getActualNotes } from 'src/utils/getActualNotes';
 import { drink_notes } from 'src/constants/storeKeys';
 import { Wrap, Button, Item } from './styles';
-import { HOUR } from 'src/constants/common';
 
 export const History = () => {
   const setCurrentStage = useStore((state) => state.setCurrentStage);
   const currentDrinks = useStore((state) => state.currentDrinks);
-  const doneDrinks: Note[] = (store.get(drink_notes) ?? []).filter(
-    (item: Note) => new Date().getTime() - item.timestamp < 8 * HOUR
-  );
+  const doneDrinks: Note[] = getActualNotes(store.get(drink_notes) ?? []);
 
   const handleClick = () => {
     if (isAuthorized()) {
