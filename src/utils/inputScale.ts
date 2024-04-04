@@ -7,7 +7,7 @@ export const strengthScale = (val: number) => {
   } else if (val === 13) {
     return 18;
   } else {
-    return (val - 12) * 5 + 20;
+    return (val - 13) * 5 + 20;
   }
 };
 export const volumeScale = (val: number) => {
