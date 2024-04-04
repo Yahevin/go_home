@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "https://yahevin.github.io/go_home/static/js/main.91764013.js",
+    "main.js": "https://yahevin.github.io/go_home/static/js/main.ba6bca61.js",
     "service-worker.js": "https://yahevin.github.io/go_home/service-worker.js",
     "index.html": "https://yahevin.github.io/go_home/index.html",
-    "main.91764013.js.map": "https://yahevin.github.io/go_home/static/js/main.91764013.js.map"
+    "main.ba6bca61.js.map": "https://yahevin.github.io/go_home/static/js/main.ba6bca61.js.map"
   },
   "entrypoints": [
-    "static/js/main.91764013.js"
+    "static/js/main.ba6bca61.js"
   ]
 }
