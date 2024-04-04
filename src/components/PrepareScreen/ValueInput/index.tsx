@@ -16,7 +16,7 @@ export const ValueInput = () => {
       <Slider
         step={strengthState >= 12 ? 1 : 0.5}
         min={3}
-        max={17}
+        max={18}
         marks={marksStrength}
         scale={() => strengthScale(strengthState)}
         valueLabelDisplay="auto"

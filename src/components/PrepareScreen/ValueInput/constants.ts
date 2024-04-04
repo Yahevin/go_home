@@ -16,7 +16,7 @@ export const marksStrength = [
     label: '12°',
   },
   {
-    value: 16,
+    value: 17,
     label: '40°',
   },
 ];
