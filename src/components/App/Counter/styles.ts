@@ -6,5 +6,5 @@ export const Wrap = styled.div`
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  color: ${colors.yellow};
+  color: ${colors.white};
 `;

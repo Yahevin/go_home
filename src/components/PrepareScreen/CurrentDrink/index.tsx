@@ -5,7 +5,7 @@ import { Modal } from 'src/shared/Modal';
 import { useStore } from 'src/hooks/useStore';
 import { getCompletion } from 'src/utils/getCompletion';
 import { CompletionInput } from 'src/components/PrepareScreen/CurrentDrink/CompletionInput';
-import { Wrap, Completion, Count, Grid, Item, Value } from './styles';
+import { Completion, Count, Grid, Item, Value, Button } from './styles';
 
 export const CurrentDrink = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,8 @@ export const CurrentDrink = () => {
 
   return (
     <>
-      <Wrap
+      <Button
+        variant={'outlined'}
         onClick={() => {
           setIsOpen(true);
         }}
@@ -24,7 +25,7 @@ export const CurrentDrink = () => {
         <Beer />
         <Count>{count}</Count>
         <Completion>{getCompletion(currentDrinks).toFixed(0)}%</Completion>
-      </Wrap>
+      </Button>
 
       <Modal
         isOpen={isOpen}

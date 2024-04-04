@@ -3,8 +3,8 @@ import { ButtonOwnProps } from '@mui/material';
 import { throttle } from 'lodash';
 
 import text from 'src/constants/text';
-import { useStore } from 'src/hooks/useStore';
 import { addDrink } from 'src/utils/addDrink';
+import { scrollTo } from 'src/utils/scrollTo';
 import { writeTheNote } from 'src/utils/writeTheNote';
 import { DoneArrow } from 'src/components/PrepareScreen/DoneArrow';
 import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
@@ -16,6 +16,7 @@ export const PrepareScreen = () => {
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
   const onSubmitEvent = useRef<() => void>();
+  const bottomAnchor = useRef<HTMLDivElement>(null);
 
   const getVariant = (isPast: boolean): ButtonOwnProps['variant'] => {
     if (!showValueInput) {
@@ -31,6 +32,8 @@ export const PrepareScreen = () => {
     setShowValueInput(true);
 
     setShowTimeInput(isNeedToWriteTime);
+
+    scrollTo(bottomAnchor.current);
   };
 
   const handleSubmit = useCallback(
@@ -51,10 +54,10 @@ export const PrepareScreen = () => {
   return (
     <>
       <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>
-      <Button variant={getVariant(false)} color="secondary" onClick={handleClick(false)}>
+      <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
         {text.INPUT_FUTURE_BTN}
       </Button>
-      <Button variant={getVariant(true)} color="secondary" onClick={handleClick(true)}>
+      <Button variant={getVariant(true)} color="primary" onClick={handleClick(true)}>
         {text.INPUT_PAST_BTN}
       </Button>
       {showValueInput && <ValueInput />}
@@ -68,6 +71,8 @@ export const PrepareScreen = () => {
 
       <CurrentDrink />
       <DoneArrow ref={onSubmitEvent} />
+
+      <div ref={bottomAnchor} />
     </>
   );
 };
