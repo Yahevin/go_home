@@ -64,7 +64,7 @@ export const PrepareScreen = () => {
       {showTimeInput && <TimeSelect />}
 
       {showValueInput && (
-        <Button variant={'outlined'} color="primary" onClick={handleSubmit}>
+        <Button variant={'outlined'} color="secondary" onClick={handleSubmit}>
           {text.INPUT_SUBMIT}
         </Button>
       )}
