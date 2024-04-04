@@ -29,22 +29,22 @@ export const getConcentration = (newNote?: Note) => {
 
   const stateRaw: State = store.get(drink_notes) ?? [];
   const state = getActualNotes(stateRaw);
-  const startTime = state.reduce((min, item) => {
-    return item.timestamp < min ? item.timestamp : min;
-  }, now);
 
-  const newState = [...state, newNote ?? null].filter((item) => !!item);
+  const newState = [...state, newNote ?? null].filter((item) => !!item).sort((a, b) => a.timestamp - b.timestamp);
 
-  const writtenVolume = newState.reduce(
-    (acc, item) =>
-      acc +
-      getAlcoholVolume({
-        volume: item.volume,
-        strength: item.strength,
-      }),
-    0
-  );
-  const currentVolume = writtenVolume + getUncompleted() - getResurrection(now - startTime, mass);
+  const writtenVolume = newState.reduce((acc, item, index) => {
+    const val = getAlcoholVolume({
+      volume: item.volume,
+      strength: item.strength,
+    });
+    const nextTimestamp = newState[index + 1]?.timestamp ?? now;
+    const res = getResurrection(now - nextTimestamp, mass);
+    const result = val - res > 0 ? val - res : 0;
+
+    return acc + result;
+  }, 0);
+
+  const currentVolume = writtenVolume + getUncompleted();
   const positiveValue = currentVolume < 0 ? 0 : currentVolume;
 
   return {
