@@ -24,6 +24,8 @@ const text = {
   RESET: 'Сброс',
   BACKWARD: 'Отменить последний ввод',
   HISTORY: 'История',
+  SHOW_TIPS: 'Показать подсказки',
+  HIDE_TIPS: 'Скрыть подсказки',
   // intoxication page
   INFO_TITLE: 'Что значат цифры сверху',
   INFO_DESCRIPTION:

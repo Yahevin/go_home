@@ -6,7 +6,7 @@ import { Description } from 'src/shared/Description';
 import { ButtonShared, ButtonType } from 'src/shared/Button';
 
 export const DescriptionWeight = styled(Description(text.WEIGHT_SELECT_TITLE))`
-  margin: 20px 0 32px 0;
+  margin: 20px 0 0 0;
 `;
 
 export const DescriptionLevel = styled(Description(text.LEVEL_SELECT_TITLE))`
@@ -19,6 +19,7 @@ export const Button: ButtonType = styled(ButtonShared)`
 `;
 
 export const SX: SxProps = {
+  marginTop: '32px',
   justifyContent: 'center',
 
   '& .MuiFormControlLabel-root:last-child': {

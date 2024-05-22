@@ -3,6 +3,7 @@ import { ButtonOwnProps } from '@mui/material';
 import { throttle } from 'lodash';
 
 import text from 'src/constants/text';
+import { useStore } from 'src/hooks/useStore';
 import { addDrink } from 'src/utils/addDrink';
 import { scrollTo } from 'src/utils/scrollTo';
 import { writeTheNote } from 'src/utils/writeTheNote';
@@ -13,6 +14,7 @@ import { CurrentDrink } from 'src/components/PrepareScreen/CurrentDrink';
 import { Button, Wrap, ButtonWrap } from './styles';
 
 export const PrepareScreen = () => {
+  const isVisibleTips = useStore((state) => state.isVisibleTips);
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
   const onSubmitEvent = useRef<() => void>();
@@ -53,7 +55,7 @@ export const PrepareScreen = () => {
 
   return (
     <>
-      <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>
+      {isVisibleTips && <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>}
       <ButtonWrap>
         <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
           {text.INPUT_FUTURE_BTN}

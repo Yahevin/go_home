@@ -6,6 +6,8 @@ import HistoryIcon from '@mui/icons-material/History';
 import AltRouteIcon from '@mui/icons-material/AltRoute';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import text from 'src/constants/text';
 import { useStore } from 'src/hooks/useStore';
@@ -18,6 +20,8 @@ import { updateConcentration } from 'src/utils/updateConcentration';
 export const MenuContent = () => {
   const setCurrentStage = useStore((state) => state.setCurrentStage);
   const setConcentration = useStore((state) => state.setConcentration);
+  const isVisibleTips = useStore((state) => state.isVisibleTips);
+  const setVisibleTips = useStore((state) => state.setVisibleTips);
 
   const handleChange = () => {
     setCurrentStage(stage.SELECT_LEVEL);
@@ -29,6 +33,10 @@ export const MenuContent = () => {
 
   const handleHistory = () => {
     setCurrentStage(stage.HISTORY);
+  };
+
+  const handleTips = () => {
+    setVisibleTips();
   };
 
   const handleBackward = () => {
@@ -56,6 +64,18 @@ export const MenuContent = () => {
 
       <Button variant={'text'} color="secondary" onClick={handleHistory} sx={ButtonSX}>
         <HistoryIcon /> {text.HISTORY}
+      </Button>
+
+      <Button variant={'text'} color="secondary" onClick={handleTips} sx={ButtonSX}>
+        {isVisibleTips ? (
+          <>
+            <VisibilityOffIcon /> {text.HIDE_TIPS}
+          </>
+        ) : (
+          <>
+            <VisibilityIcon /> {text.SHOW_TIPS}
+          </>
+        )}
       </Button>
 
       <Button variant={'text'} color="error" onClick={handleBackward} sx={ButtonSX}>

@@ -15,9 +15,9 @@ export const ButtonWrap = styled.div`
 `;
 
 export const Button: ButtonType = styled(ButtonShared)`
+  margin: 24px auto 0 auto;
+
   & + & {
     margin-left: 12px;
   }
 `;
-
-export const Input = '';
