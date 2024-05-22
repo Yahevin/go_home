@@ -7,6 +7,9 @@ const text = {
   LET_START: 'Приступим!',
   // select the level page
   LEVEL_SELECT_TITLE: 'Выбор уровня',
+  HOW_CONCENTRATION_COUNTS:
+    'Промили - это грамм алкоголя на вес тела в кг. Поэтому для отражения более-менее адекватного значения нужен вес человека',
+  WEIGHT_SELECT_TITLE: 'Ввод значения веса',
   NEXT: 'Продолжить',
   // prepare to input page
   TIME_SELECT_TITLE: 'Определимся с временем',

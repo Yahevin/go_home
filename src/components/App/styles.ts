@@ -7,6 +7,9 @@ export const Wrap = styled.div`
   position: relative;
   background: ${colors.purple};
   min-height: 100dvh;
+
+  max-width: 768px;
+  margin: 0 auto;
 `;
 
 export const Content = styled.main`

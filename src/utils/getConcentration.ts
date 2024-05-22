@@ -1,8 +1,7 @@
 import store from 'store2';
 import { Note } from 'src/types';
 import { useStore } from 'src/hooks/useStore';
-import { selected_level, drink_notes } from 'src/constants/storeKeys';
-import { LevelKeys, levelTable, levelTableKeys } from 'src/constants/levels';
+import { drink_notes } from 'src/constants/storeKeys';
 import { getAlcoholVolume } from 'src/utils/getAlcoholVolume';
 import { getResurrection } from 'src/utils/getResurrection';
 import { getActualNotes } from 'src/utils/getActualNotes';
@@ -22,10 +21,9 @@ const getUncompleted = () => {
 };
 
 export const getConcentration = (newNote?: Note) => {
-  const level: LevelKeys = store.get(selected_level) ?? levelTableKeys.b;
+  const { level, weight } = useStore.getState();
 
   const now = new Date().getTime();
-  const mass = levelTable[level]; // масса пользователя в кг
 
   const stateRaw: State = store.get(drink_notes) ?? [];
   const state = getActualNotes(stateRaw);
@@ -37,11 +35,18 @@ export const getConcentration = (newNote?: Note) => {
       volume: item.volume,
       strength: item.strength,
     });
-    const nextTimestamp = newState[index + 1]?.timestamp ?? now;
-    const res = getResurrection(now - nextTimestamp, mass);
-    const result = val - res > 0 ? val - res : 0;
 
-    return acc + result;
+    const currentTimestamp = newState[index]?.timestamp ?? now;
+    const nextTimestamp = newState[index + 1]?.timestamp ?? now;
+    const res = getResurrection({
+      delay: nextTimestamp - currentTimestamp,
+      level,
+      weight,
+    });
+
+    const result = val - res + acc;
+
+    return result > 0 ? result : 0;
   }, 0);
 
   const currentVolume = writtenVolume + getUncompleted();
@@ -50,6 +55,6 @@ export const getConcentration = (newNote?: Note) => {
   return {
     state: newState,
     alcoholVolume: positiveValue,
-    concentration: positiveValue / mass,
+    concentration: positiveValue / weight,
   };
 };
