@@ -3,6 +3,7 @@ import { ButtonOwnProps } from '@mui/material';
 import { throttle } from 'lodash';
 
 import text from 'src/constants/text';
+import { useStore } from 'src/hooks/useStore';
 import { addDrink } from 'src/utils/addDrink';
 import { scrollTo } from 'src/utils/scrollTo';
 import { writeTheNote } from 'src/utils/writeTheNote';
@@ -10,9 +11,10 @@ import { DoneArrow } from 'src/components/PrepareScreen/DoneArrow';
 import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
 import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
 import { CurrentDrink } from 'src/components/PrepareScreen/CurrentDrink';
-import { Button, Wrap } from './styles';
+import { Button, Wrap, ButtonWrap } from './styles';
 
 export const PrepareScreen = () => {
+  const isVisibleTips = useStore((state) => state.isVisibleTips);
   const [showTimeInput, setShowTimeInput] = useState(false);
   const [showValueInput, setShowValueInput] = useState(false);
   const onSubmitEvent = useRef<() => void>();
@@ -53,13 +55,16 @@ export const PrepareScreen = () => {
 
   return (
     <>
-      <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>
-      <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
-        {text.INPUT_FUTURE_BTN}
-      </Button>
-      <Button variant={getVariant(true)} color="primary" onClick={handleClick(true)}>
-        {text.INPUT_PAST_BTN}
-      </Button>
+      {isVisibleTips && <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>}
+      <ButtonWrap>
+        <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
+          {text.INPUT_FUTURE_BTN}
+        </Button>
+        <Button variant={getVariant(true)} color="primary" onClick={handleClick(true)}>
+          {text.INPUT_PAST_BTN}
+        </Button>
+      </ButtonWrap>
+
       {showValueInput && <ValueInput />}
       {showTimeInput && <TimeSelect />}
 

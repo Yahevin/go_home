@@ -1,11 +1,14 @@
 import React from 'react';
-import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
-import { Wrap, SX } from './styles';
-import { RadioBtn } from './Radio';
+import { FormControlLabel, RadioGroup } from '@mui/material';
+
 import { useStore } from 'src/hooks/useStore';
+import { FormControl } from 'src/shared/FormControl';
 import { valueTable } from 'src/constants/timeValues';
+import { Wrap, SX, StyledSubtitle } from './styles';
+import { RadioBtn } from './Radio';
 
 export const TimeSelect = () => {
+  const isVisibleTips = useStore((state) => state.isVisibleTips);
   const { time, setTime } = useStore();
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +17,7 @@ export const TimeSelect = () => {
 
   return (
     <Wrap>
+      {isVisibleTips && <StyledSubtitle>Как давно было выпито?</StyledSubtitle>}
       <FormControl>
         <RadioGroup name="time-select" value={time} onChange={handleTimeChange} row sx={SX}>
           {valueTable.map(({ key, value }) => (

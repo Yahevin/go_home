@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useStore } from 'src/hooks/useStore';
 import { initialStrength, initialVolume, strengthScale, volumeScale } from 'src/utils/inputScale';
 import { marksStrength, marksValue } from './constants';
-import { Slider } from './styles';
+import { Slider, StyledSubtitle } from './styles';
 
 export const ValueInput = () => {
+  const isVisibleTips = useStore((state) => state.isVisibleTips);
   const setStrength = useStore((state) => state.setStrength);
   const setVolume = useStore((state) => state.setVolume);
 
@@ -13,6 +14,7 @@ export const ValueInput = () => {
 
   return (
     <>
+      {isVisibleTips && <StyledSubtitle>Крепость бухлишка</StyledSubtitle>}
       <Slider
         step={strengthState >= 12 ? 1 : 0.5}
         min={3}
@@ -30,6 +32,8 @@ export const ValueInput = () => {
           setStrength(strengthScale(strengthState));
         }}
       />
+
+      {isVisibleTips && <StyledSubtitle>Объем стакана</StyledSubtitle>}
       <Slider
         step={1}
         min={1}

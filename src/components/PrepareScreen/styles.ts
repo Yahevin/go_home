@@ -7,8 +7,17 @@ export const Wrap = styled(Description(text.TIME_SELECT_TITLE))`
   margin-top: 20px;
 `;
 
-export const Button: ButtonType = styled(ButtonShared)`
-  margin: 24px auto 0 auto;
+export const ButtonWrap = styled.div`
+  margin: 24px 0 0 0;
+
+  display: flex;
+  justify-content: center;
 `;
 
-export const Input = '';
+export const Button: ButtonType = styled(ButtonShared)`
+  margin: 24px auto 0 auto;
+
+  & + & {
+    margin-left: 12px;
+  }
+`;
