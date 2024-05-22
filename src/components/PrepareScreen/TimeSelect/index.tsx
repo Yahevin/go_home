@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
-import { Wrap, SX } from './styles';
+import { Wrap, SX, StyledSubtitle } from './styles';
 import { RadioBtn } from './Radio';
 import { useStore } from 'src/hooks/useStore';
 import { valueTable } from 'src/constants/timeValues';
@@ -14,6 +14,7 @@ export const TimeSelect = () => {
 
   return (
     <Wrap>
+      <StyledSubtitle>Как давно было выпито?</StyledSubtitle>
       <FormControl>
         <RadioGroup name="time-select" value={time} onChange={handleTimeChange} row sx={SX}>
           {valueTable.map(({ key, value }) => (

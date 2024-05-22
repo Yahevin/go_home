@@ -10,7 +10,7 @@ import { DoneArrow } from 'src/components/PrepareScreen/DoneArrow';
 import { ValueInput } from 'src/components/PrepareScreen/ValueInput';
 import { TimeSelect } from 'src/components/PrepareScreen/TimeSelect';
 import { CurrentDrink } from 'src/components/PrepareScreen/CurrentDrink';
-import { Button, Wrap } from './styles';
+import { Button, Wrap, ButtonWrap } from './styles';
 
 export const PrepareScreen = () => {
   const [showTimeInput, setShowTimeInput] = useState(false);
@@ -54,12 +54,15 @@ export const PrepareScreen = () => {
   return (
     <>
       <Wrap>{text.TIME_SELECT_DESCRIPTION}</Wrap>
-      <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
-        {text.INPUT_FUTURE_BTN}
-      </Button>
-      <Button variant={getVariant(true)} color="primary" onClick={handleClick(true)}>
-        {text.INPUT_PAST_BTN}
-      </Button>
+      <ButtonWrap>
+        <Button variant={getVariant(false)} color="primary" onClick={handleClick(false)}>
+          {text.INPUT_FUTURE_BTN}
+        </Button>
+        <Button variant={getVariant(true)} color="primary" onClick={handleClick(true)}>
+          {text.INPUT_PAST_BTN}
+        </Button>
+      </ButtonWrap>
+
       {showValueInput && <ValueInput />}
       {showTimeInput && <TimeSelect />}
 
