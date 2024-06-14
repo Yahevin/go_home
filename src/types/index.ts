@@ -1,4 +1,8 @@
-export type Drink = { volume: number; strength: number; percentage: number; id: string };
+// timestamp: время начала
+// value: чистый спирт
+// strength: крепость в градусах
+// percentage: доля осиленного в %
 
-// время в timestamp, value: чистый спирт
+export type Drink = { timestamp: number; volume: number; strength: number; percentage: number; id: string };
+
 export type Note = { timestamp: number; volume: number; strength: number };

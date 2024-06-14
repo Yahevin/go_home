@@ -9,35 +9,33 @@ import { safeDivide } from 'src/utils/safeDivide';
 
 type State = Note[];
 
-const getUncompleted = () => {
+const getUncompleted = (): State => {
   const { currentDrinks } = useStore.getState();
-  return (
-    currentDrinks.reduce((acc, item) => {
-      const value = getAlcoholVolume({ volume: item.volume, strength: item.strength }) * item.percentage;
-
-      return acc + safeDivide(value, 100);
-    }, 0) ?? 0
-  );
+  return currentDrinks.map((item) => ({
+    volume: safeDivide(item.volume * item.percentage, 100),
+    strength: item.strength,
+    timestamp: item.timestamp,
+  }));
 };
 
-export const getConcentration = (newNote?: Note) => {
+export const getConcentration = () => {
+  const now = new Date().getTime();
   const { level, weight } = useStore.getState();
 
-  const now = new Date().getTime();
+  const completed: State = store.get(drink_notes) ?? [];
+  const uncompleted: State = getUncompleted();
+  const state = [...getActualNotes(completed), ...getActualNotes(uncompleted)]
+    .filter((item) => !!item)
+    .sort((a, b) => a.timestamp - b.timestamp);
 
-  const stateRaw: State = store.get(drink_notes) ?? [];
-  const state = getActualNotes(stateRaw);
-
-  const newState = [...state, newNote ?? null].filter((item) => !!item).sort((a, b) => a.timestamp - b.timestamp);
-
-  const writtenVolume = newState.reduce((acc, item, index) => {
+  const writtenVolume = state.reduce((acc, item, index) => {
     const val = getAlcoholVolume({
       volume: item.volume,
       strength: item.strength,
     });
 
-    const currentTimestamp = newState[index]?.timestamp ?? now;
-    const nextTimestamp = newState[index + 1]?.timestamp ?? now;
+    const currentTimestamp = state[index]?.timestamp ?? now;
+    const nextTimestamp = state[index + 1]?.timestamp ?? now;
     const res = getResurrection({
       delay: nextTimestamp - currentTimestamp,
       level,
@@ -49,11 +47,9 @@ export const getConcentration = (newNote?: Note) => {
     return result > 0 ? result : 0;
   }, 0);
 
-  const currentVolume = writtenVolume + getUncompleted();
-  const positiveValue = currentVolume < 0 ? 0 : currentVolume;
+  const positiveValue = writtenVolume < 0 ? 0 : writtenVolume;
 
   return {
-    state: newState,
     alcoholVolume: positiveValue,
     concentration: positiveValue / weight,
   };
