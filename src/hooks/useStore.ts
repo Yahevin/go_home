@@ -4,7 +4,7 @@ import { Drink } from 'src/types';
 import { stage, Stage } from 'src/constants/stages';
 import { valueTable } from 'src/constants/timeValues';
 import { LevelKeys, levelTableKeys } from 'src/constants/levels';
-import { selected_level, selected_weight, tips_visibility } from 'src/constants/storeKeys';
+import { selected_level, selected_weight, tips_visibility, current_drinks } from 'src/constants/storeKeys';
 import { initialStrength, initialVolume, volumeScale, strengthScale } from 'src/utils/inputScale';
 
 interface StoreType {
@@ -33,7 +33,7 @@ interface StoreType {
   setVisibleTips: () => void;
 }
 
-export const useStore = create<StoreType>()((set, state) => ({
+export const useStore = create<StoreType>()((set) => ({
   currentStage: stage.INITIAL,
   setCurrentStage: (val) => set({ currentStage: val }),
   //
@@ -60,8 +60,12 @@ export const useStore = create<StoreType>()((set, state) => ({
   concentration: 0,
   setConcentration: (val) => set({ concentration: val }),
   //
-  currentDrinks: [],
-  setCurrentDrinks: (val) => set({ currentDrinks: val }),
+  currentDrinks: store.get(current_drinks) ?? [],
+  setCurrentDrinks: (val) => {
+    store.set(current_drinks, val);
+
+    return set({ currentDrinks: val });
+  },
   //
   isVisibleTips: store.get(tips_visibility) ?? true,
   setVisibleTips: () =>

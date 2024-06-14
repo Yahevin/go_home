@@ -10,15 +10,16 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import text from 'src/constants/text';
+import { stage } from 'src/constants/stages';
+import { drink_notes } from 'src/constants/storeKeys';
 import { useStore } from 'src/hooks/useStore';
 import { ButtonShared as Button } from 'src/shared/Button';
-import { drink_notes } from 'src/constants/storeKeys';
-import { stage } from 'src/constants/stages';
-import { Wrap, Spacer, ButtonSX } from './styles';
 import { updateConcentration } from 'src/utils/updateConcentration';
+import { Wrap, Spacer, ButtonSX } from './styles';
 
 export const MenuContent = () => {
   const setCurrentStage = useStore((state) => state.setCurrentStage);
+  const setCurrentDrinks = useStore((state) => state.setCurrentDrinks);
   const setConcentration = useStore((state) => state.setConcentration);
   const isVisibleTips = useStore((state) => state.isVisibleTips);
   const setVisibleTips = useStore((state) => state.setVisibleTips);
@@ -47,7 +48,7 @@ export const MenuContent = () => {
 
   const handleReset = () => {
     store.set(drink_notes, []);
-
+    setCurrentDrinks([]);
     setCurrentStage(stage.PREPARE_TO_INPUT);
     setConcentration(0);
   };
